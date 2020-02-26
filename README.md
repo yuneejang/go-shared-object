@@ -23,7 +23,9 @@ gcc -o test go-functions.so test.c
 #### The result
 ```
 Using awesome lib from C:
-awesome.Add(12,99) = 111
+rpc.Dial(tcp, 127.0.0.1:7500)
+dial tcp 127.0.0.1:7500: connectex: No connection could be made because the target machine actively refused it.
+awesome.Add(12,99) = -1
 awesome.Sub(12,99) = -87
 awesome.Mul(12,99) = 1188
 awesome.Cosine(1) = 0.540302
@@ -37,3 +39,7 @@ Hello from C!
 
 #### functions.go
 targets.go 에서 불러서 사용할 다른 패키지에 정의된 함수
+
+#### 고려사항 
+- https://golang.org/cmd/cgo
+- Not all Go types can be mapped to C types in a useful way. Go struct types are not supported; use a C struct type. Go array types are not supported; use a C pointer.
